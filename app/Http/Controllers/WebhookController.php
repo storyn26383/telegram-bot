@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Telegram\Update;
 use App\Telegram\Webhook;
 use Illuminate\Support\Facades\Log;
@@ -15,19 +16,23 @@ class WebhookController extends Controller
 
         Log::info((string) $webhook->getUpdate());
 
-        if ($webhook->isEdited()) {
-            return;
-        }
+        try {
+            if ($webhook->isEdited()) {
+                return;
+            }
 
-        if (!$webhook->isAuthorizedUser()) {
-            return $webhook->sendMessage('Huh?');
-        }
+            if (!$webhook->isAuthorizedUser()) {
+                return $webhook->sendMessage('Huh?');
+            }
 
-        if ($webhook->isCommand()) {
-            return $webhook->runCommandHandler();
-        }
+            if ($webhook->isCommand()) {
+                return $webhook->runCommandHandler();
+            }
 
-        return $webhook->sendMessage('Hello World!');
+            return $webhook->sendMessage('Hello World!');
+        } catch (Exception $e) {
+            return $webhook->sendMessage($e->getMessage());
+        }
     }
 
     protected function prepareWebhook()
