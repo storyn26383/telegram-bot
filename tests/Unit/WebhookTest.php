@@ -35,6 +35,16 @@ class WebhookTest extends TestCase
         $this->assertTrue($webhook->isCommand());
     }
 
+    public function testIsEdited()
+    {
+        $update = m::mock(Update::class);
+        $update->shouldReceive('isEdited')->andReturn(true);
+
+        $webhook = new Webhook($update);
+
+        $this->assertTrue($webhook->isEdited());
+    }
+
     public function testGetUpdate()
     {
         $update = m::mock(Update::class);

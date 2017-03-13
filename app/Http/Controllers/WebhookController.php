@@ -15,6 +15,10 @@ class WebhookController extends Controller
 
         Log::info((string) $webhook->getUpdate());
 
+        if ($webhook->isEdited()) {
+            return;
+        }
+
         if (!$webhook->isAuthorizedUser()) {
             return $webhook->sendMessage('Huh?');
         }

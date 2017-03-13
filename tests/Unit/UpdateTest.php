@@ -21,6 +21,13 @@ class UpdateTest extends TestCase
         $this->assertFalse($update->isCommand());
     }
 
+    public function testIsEdited()
+    {
+        $update = new Update($this->getEditedUpdate());
+
+        $this->assertTrue($update->isEdited());
+    }
+
     public function testGetUserId()
     {
         $update = new Update($this->getTextUpdate());
@@ -59,5 +66,10 @@ class UpdateTest extends TestCase
     protected function getCommandUpdate(): string
     {
         return file_get_contents(__DIR__ . '/../fixtures/command.json');
+    }
+
+    protected function getEditedUpdate(): string
+    {
+        return file_get_contents(__DIR__ . '/../fixtures/edited.json');
     }
 }

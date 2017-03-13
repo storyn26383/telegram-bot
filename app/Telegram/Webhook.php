@@ -30,6 +30,11 @@ class Webhook
         return $this->update->isCommand();
     }
 
+    public function isEdited(): bool
+    {
+        return $this->update->isEdited();
+    }
+
     public function runCommandHandler()
     {
         return Telegram::commandsHandler(true);

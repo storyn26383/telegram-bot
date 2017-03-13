@@ -18,6 +18,11 @@ class Update
         return !!preg_match('/^\/([^\s@]+)@?(\S+)?\s?(.*)$/', $this->message->text);
     }
 
+    public function isEdited(): bool
+    {
+        return array_key_exists('edited_message', $this->update);
+    }
+
     public function getUserId(): int
     {
         return (int) $this->message->from->id;
