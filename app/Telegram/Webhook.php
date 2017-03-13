@@ -8,7 +8,7 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 class Webhook
 {
     protected $update;
-    protected $whitelist = [347525401];
+    protected $whitelist = [347525401, 317324505];
 
     public function __construct(Update $update)
     {
