@@ -15,6 +15,11 @@ class Webhook
         $this->update = $update;
     }
 
+    public function getUpdate()
+    {
+        return $this->update;
+    }
+
     public function isAuthorizedUser(): bool
     {
         return in_array($this->update->getUserId(), $this->whitelist);

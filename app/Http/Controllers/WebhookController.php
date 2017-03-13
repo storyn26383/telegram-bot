@@ -4,17 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Telegram\Update;
 use App\Telegram\Webhook;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Request;
 
 class WebhookController extends Controller
 {
-    public function handle(Request $request)
+    public function handle()
     {
-        $update = new Update($request->getContent());
-        $webhook = new Webhook($update);
+        $webhook = $this->prepareWebhook();
 
-        Log::info((string) $update);
+        Log::info((string) $webhook->getUpdate());
 
         if (!$webhook->isAuthorizedUser()) {
             return $webhook->sendMessage('Huh?');
@@ -25,5 +24,10 @@ class WebhookController extends Controller
         }
 
         return $webhook->sendMessage('Hello World!');
+    }
+
+    protected function prepareWebhook()
+    {
+        return new Webhook(new Update(Request::getContent()));
     }
 }
