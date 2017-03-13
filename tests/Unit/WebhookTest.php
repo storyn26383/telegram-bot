@@ -10,11 +10,6 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 
 class WebhookTest extends TestCase
 {
-    public function tearDown()
-    {
-        m::close();
-    }
-
     public function testWhitelist()
     {
         $update = m::mock(Update::class);
