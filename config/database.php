@@ -66,6 +66,12 @@ return [
             'sslmode' => 'prefer',
         ],
 
+        'testing' => [
+            'driver' => 'sqlite',
+            'database' => base_path('tests/database.sqlite'),
+            'prefix' => '',
+        ],
+
     ],
 
     /*

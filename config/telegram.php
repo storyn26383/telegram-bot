@@ -58,5 +58,6 @@ return [
     'commands' => [
         Telegram\Bot\Commands\HelpCommand::class,
         App\Telegram\Commands\StartCommand::class,
+        App\Telegram\Commands\TodoCommand::class,
     ],
 ];
